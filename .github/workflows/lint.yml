@@ -1,0 +1,23 @@
+name: Lint and Formatting Check
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install devbox
+        uses: jetpack-io/devbox-install-action@v0.3.0
+        with:
+          enable-cache: true
+      - name: pnpm install
+        run: pnpm install --frozen-lockfile
+      - name: lint check
+        run: pnpm run lint
+      - name: prettier check
+        run: pnpm run prettier:check
