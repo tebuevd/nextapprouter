@@ -16,10 +16,9 @@ jobs:
         with:
           enable-cache: true
           devbox-version: 0.5.4
-      - run: devbox shell
       - name: pnpm install
-        run: pnpm install --frozen-lockfile
+        run: devbox run -- pnpm install --frozen-lockfile
       - name: lint check
-        run: pnpm run lint
+        run: devbox run -- pnpm run lint
       - name: prettier check
-        run: pnpm run prettier:check
+        run: devbox run -- pnpm run prettier:check
