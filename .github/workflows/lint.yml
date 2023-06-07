@@ -16,6 +16,7 @@ jobs:
         with:
           enable-cache: true
           devbox-version: 0.5.4
+      - run: devbox shell
       - name: pnpm install
         run: pnpm install --frozen-lockfile
       - name: lint check
