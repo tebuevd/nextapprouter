@@ -9,24 +9,29 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v21
-      - uses: jetpack-io/devbox-install-action@v0.3.0
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v21
+      - name: Install Devbox
+        uses: jetpack-io/devbox-install-action@v0.3.0
         with:
           enable-cache: true
           devbox-version: 0.5.4
-      - id: pnpm-cache
+      - name: Get pnpm cache location
+        id: pnpm-cache
         run: |
           echo "STORE_PATH=$(devbox run -- pnpm store path)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v3
+      - name: Restore pnpm cache
+        uses: actions/cache@v3
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      - name: pnpm install
+      - name: Run pnpm install
         run: devbox run -- pnpm install --frozen-lockfile
-      - name: lint check
+      - name: Run lint check
         run: devbox run -- pnpm run lint
-      - name: prettier check
+      - name: Run prettier check
         run: devbox run -- pnpm run prettier:check
