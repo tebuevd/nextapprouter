@@ -9,13 +9,21 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: cachix/install-nix-action@v21
       - uses: actions/checkout@v3
-      - name: Install devbox
-        uses: jetpack-io/devbox-install-action@v0.3.0
+      - uses: cachix/install-nix-action@v21
+      - uses: jetpack-io/devbox-install-action@v0.3.0
         with:
           enable-cache: true
           devbox-version: 0.5.4
+      - id: pnpm-cache
+        run: |
+          echo "STORE_PATH=$(devbox run -- pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: pnpm install
         run: devbox run -- pnpm install --frozen-lockfile
       - name: lint check
