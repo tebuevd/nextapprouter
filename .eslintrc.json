@@ -1,3 +1,13 @@
 {
-  "extends": ["next/core-web-vitals", "eslint-config-prettier"]
+  "extends": ["next/core-web-vitals", "eslint-config-prettier"],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "import/extensions": ["error", "ignorePackages"],
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "logical-assignment-operators": "error",
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": "error"
+  }
 }

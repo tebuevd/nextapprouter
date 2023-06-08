@@ -22,6 +22,9 @@ dependencies:
   eslint-config-prettier:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.42.0)
+  eslint-plugin-simple-import-sort:
+    specifier: ^10.0.0
+    version: 10.0.0(eslint@8.42.0)
   next:
     specifier: 13.4.4
     version: 13.4.4(react-dom@18.2.0)(react@18.2.0)
@@ -1077,6 +1080,14 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.8
+    dev: false
+
+  /eslint-plugin-simple-import-sort@10.0.0(eslint@8.42.0):
+    resolution: {integrity: sha512-AeTvO9UCMSNzIHRkg8S6c3RPy5YEwKWSQPx3DYghLedo2ZQxowPFLGDN1AZ2evfg6r6mjBSZSLxLFsWSu3acsw==}
+    peerDependencies:
+      eslint: '>=5.0.0'
+    dependencies:
+      eslint: 8.42.0
     dev: false
 
   /eslint-scope@7.2.0:
